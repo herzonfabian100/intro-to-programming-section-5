@@ -12,7 +12,7 @@ const higherThan99 = document.getElementById('higher-than-99');
 
 let targetNumber;
 let attempts = 0;
-let maxNumberOfAttempts = 5;
+const maxNumberOfAttempts = 5;
 
 // Returns a random number from min (inclusive) to max (exclusive)
 // Usage:
@@ -52,9 +52,10 @@ function checkGuess() {
 
         submitButton.disabled = true;
         guessInput.disabled = true;
-    }
+    } else
 
-    if (guess !== targetNumber) {
+
+    {
         if (guess < targetNumber) {
             tooLowMessage.style.display = '';
         } else {
@@ -91,7 +92,6 @@ function setup() {
     console.log(`target number: ${targetNumber}`);
 
     // Reset number of attempts
-    maxNumberOfAttempts = 5;
     attempts = 0;
 
     // Enable the input and submit button
@@ -104,5 +104,11 @@ function setup() {
 
 submitButton.addEventListener('click', checkGuess);
 resetButton.addEventListener('click', setup);
+
+guessInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        checkGuess();
+    }
+});
 
 setup();
